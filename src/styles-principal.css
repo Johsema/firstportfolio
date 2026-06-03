@@ -32,12 +32,13 @@ body{
 
     /* CAPA OSCURA + TU IMAGEN DIRECTA DE DRIVE */
     /* Usamos un linear-gradient encima de la imagen para oscurecerla y garantizar legibilidad */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.55),rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/11177799/pexels-photo-11177799.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55),rgba(0, 0, 0, 0.7)), url('./pexels-merlin-11177799.webp');
 
     /* PROPIEDADES CRUCIALES PARA EL BACKGROUND */
-    background-position: center; /* Centra la imagen de fondo */
+    background-position: center center; /* Centra la imagen de fondo */
     background-size: cover;      /* Hace que la imagen cubra todo el contenedor sin estirarse */
     background-repeat: no-repeat; /* Evita que la imagen se duplique en mosaico */
+    background-attachment: fixed; /* Mantiene el fondo quieto mientras haces scroll */
 }
 
 /* 
