@@ -1,2 +1,80 @@
+:root{
+    --background-main: #1e242b;    /* Azul marino oscuro (Franja 1) */
+    --background-nav: #2d33398a; /* Gris pizarra (Franja 2) */
+    --accent-color: #938a7f;       /* Gris taupe (Franja 3) */
+    --text-primary: #e5dac9;       /* Crema claro (Franja 4) */
+}
+
+/* =========================================
+CONTENEDOR PRINCIPAL
+========================================= */
+
+.container-main{
+    width: 100%;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.container-main h1{
+    color: var(--text-primary);
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+
+}
 
 
+/* =========================================
+ESTRUCTURA DE LA TARJETA
+========================================= */
+.container-exercise {
+    width: 100%;
+    max-width: 500px;
+    
+    /* Usamos tu variable de gris pizarra transparente */
+    background-color: var(--background-nav); 
+    backdrop-filter: blur(x);
+    -webkit-backdrop-filter: blur(12px);
+    
+    border-radius: 15px;
+    /* Un borde sutil usando el color crema muy transparente */
+    border: 1px solid rgba(229, 218, 201, 0.15); 
+    
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el efecto hover */
+}
+
+/* =========================================
+EL ENLACE OCUPA TODA LA TARJETA
+========================================= */
+.container-exercise a {
+    display: block; /* Obliga al enlace a rellenar el 100% de la tarjeta */
+    padding: 2.5rem; /* El padding se lo damos al enlace para que TODO sea cliqueable */
+    text-decoration: none;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.container-exercise h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.container-exercise p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    opacity: 0.9; /* Hace que el párrafo sea ligeramente más suave que el título */
+}
+
+/* =========================================
+EFECTO HOVER (Interactividad premium)
+========================================= */
+.container-exercise:hover {
+    transform: translateY(-5px); /* La tarjeta sube sutilmente al pasar el mouse */
+    border-color: rgba(229, 218, 201, 0.4); /* El borde se ilumina un poco */
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
