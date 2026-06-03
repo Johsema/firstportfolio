@@ -1,36 +1,70 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root{
+    --background-main: #1e242b;    /* Azul marino oscuro (Franja 1) */
+    --background-nav: #2d33398a; /* Gris pizarra (Franja 2) */
+    --accent-color: #527b96;       /* Gris taupe (Franja 3) */
+    --text-primary: #e5dac9;       /* Crema claro (Franja 4) */
 }
 
-html{
-    font-size: 62.5%;
-}
+/* =========================================
+ALINEACIÓN GLOBAL DE LA PÁGINA
+========================================= */
 
 body{
-    min-width: 100%;
+    background-color: var(--background-main);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
+h1 { 
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: 3rem;
+}
+/* =========================================
+TARJETA CONTENEDORA
+========================================= */
+
 .container{
+    width: 90%;
+    max-width: 45rem;
+    margin: 4rem auto; /* Separa la tarjeta del nav y la centra */
+    padding: 3rem 2.5rem;
     text-align: center;
-    width: 100%;
-    max-width: 50rem;
+
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem; /* Espaciado interno limpio entre componentes */
+
+    /*El mismo acabado premium que manejamos en las ventanas*/
+    background-color: var(--background-nav);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /*COMPATIBILIDAD CON SAFARI */
+
+    border-radius: 1.5rem;
+    border: 1px solid rgba(229, 218, 201, 0.15); /* Tu color crema traslúcido */;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
 #valor{
-    font-size: 4rem;
+    font-size: 5rem;
+    color: var(--text-primary);
+    font-weight: bold;
 }
+
+/* =========================================
+BOTONES
+========================================= */
 
 .buttom{
     border: none;
     padding: 1.5rem;
-    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.05)
+    border-radius: 1rem ;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.05);
+    background-color: var(--accent-color);
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: 1.7rem;
+    
 }

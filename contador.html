@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/styles.css">
+    <link rel="stylesheet" href="./src/styles-principal.css">
+    <link rel="stylesheet" href="./src/styles-contador.css">
     <title>Contador</title>
 </head>
 <body>
+    <header class="container-header">
+        <nav class="container-nav">
+            <ul class="container-nav_lista">
+                <li class="nav-elements"><a href="./index.html">Home</a></li>
+                <li class="nav-elements"><a href="./ejercicios.html">Ejercicios</a></li>
+            </ul>
+            <span class="menu-nav">=</span>
+        </nav>
+    </header>
+    <h1>CONTADOR</h1>
     <section class="container">
         <span id="valor" value="0">0</span>
         <button class="buttom" id="btn-incrementar">Incrementar</button>
         <button class="buttom" id="btn-disminuir">Disminuir</button>
         <button class="buttom" id="btn-reiniciar">Reiniciar</button>
     </section>
+    <script src="contador.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

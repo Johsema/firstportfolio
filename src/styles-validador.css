@@ -34,7 +34,7 @@ TARJETA CONTENEDORA (GLASSMORPHISM)
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     
-    border-radius: 15px;
+    border-radius: 1.5rem;
     border: 1px solid rgba(229, 218, 201, 0.15); /* Tu color crema traslúcido */
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
