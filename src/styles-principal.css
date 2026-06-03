@@ -82,12 +82,16 @@ PROPIEDADES DEL NAV
 
     /* El truco de magia: fondo negro muy transparente + desenfoque */
     background-color: rgba(0, 0, 0, 0.6); /* El 0.6 es 60% de opacidad */
-    backdrop-filter: blur(10px);         /* Desenfoca lo que está atrás */
+    backdrop-filter: blur(13px);         /* Desenfoca lo que está atrás */
     -webkit-backdrop-filter: blur(10px); /* Compatibilidad para Safari */
 
     /* Estado inicial: OCULTO */
     display: none; 
     z-index: 10; /* Asegura que quede por encima del contenido del main */
+
+    /* ─── EL TRUCO PARA SUAVIZAR EL FINAL ─── */
+    -webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
 }
 
 /* Esta clase la agregaremos con JavaScript para mostrar el menú */
@@ -145,18 +149,7 @@ PROPIEDADES DEL CONTENEDOR MAIN
     align-items: center;
     padding: 7rem 2rem 7rem 2rem;
     border-radius: 2rem;
-
-}
-
-.bienvenida h1{
-    padding-bottom: 1rem;
-    color: var(--text-primary);
-}
-
-.bienvenida p{
-    color: var(--accent-color);
-    max-width: 35rem;
-    text-align: center;
+    gap: 2rem;
 }
 
 /* 
@@ -164,6 +157,81 @@ PROPIEDADES DEL CONTENEDOR MAIN
 PROPIEDADES DEL SECTION = BIENVENIDA
 =========================================
 */
+
+.bienvenida {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+}
+
+.bienvenida h1 {
+    padding-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 4rem;
+    text-align: center;
+}
+
+.bienvenida p {
+    color: var(--accent-color);
+    max-width: 45rem; 
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+/* =========================================
+NUEVO CONTENEDOR GRUPAL DE TARJETAS (DIVS)
+========================================= */
+.program-container {
+    width: 90%;
+    max-width: 45rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* LA TARJETA INDIVIDUAL */
+.card-item {
+    width: 100%;
+    padding: 2.5rem;
+    background-color: var(--background-nav);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 1px solid rgba(229, 218, 201, 0.1);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    /* Alineamos el contenido al centro usando Flexbox vertical */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* =========================================
+CONTROL Y ESTILO DE LOS SVG PUROS
+========================================= */
+.icono-svg {
+    width: 4.5rem;   /* Forzamos el ancho del vector */
+    height: 4.5rem;  /* Forzamos el alto del vector */
+    transition: transform 0.3s ease;
+    
+    /* TIP PREMIUM DE DISEÑO:
+      Si quieres que de inicio no brillen tanto y combinen con tu paleta, 
+      puedes aplicarles un filtro de escala de grises sutil. 
+      Al hacer hover, se los quitamos para recuperar su color nativo.
+    */
+    filter: grayscale(40%) opacity(0.8);
+}
 
 /* 
 =========================================
@@ -208,9 +276,24 @@ MEDIA QUARIES
         padding: 0; /* Quitamos el relleno del menú móvil */
         gap: 2rem;
         background-color: transparent; /* Ya no necesita fondo propio, usa el del nav */
+        backdrop-filter: blur(0px);         /* Desenfoca lo que está atrás */
+        -webkit-backdrop-filter: blur(10px); /* Compatibilidad para Safari */
+
+    
     }
     /* 3. Ocultamos el botón de hamburguesa "=" */
     .menu-nav{
         display: none; /* Desaparece por completo en pantallas de escritorio */
     }
+}
+
+.card-item:hover {
+    transform: translateY(-4px); /* Sube la tarjeta suavemente */
+    border-color: rgba(229, 218, 201, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.card-item:hover .icono-svg {
+    transform: scale(1.1); /* Efecto de crecimiento leve del logo */
+    filter: grayscale(0%) opacity(1); /* Recupera su color original brillante */
 }
