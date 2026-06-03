@@ -1,54 +1,199 @@
-.container{
-    text-align: center;
-    width: 100%;
-    max-width: 45rem;
+:root{
+    --background-main: #1e242b;    /* Azul marino oscuro (Franja 1) */
+    --background-nav: #2d33398a; /* Gris pizarra (Franja 2) */
+    --accent-color: #938a7f;       /* Gris taupe (Franja 3) */
+    --text-primary: #e5dac9;       /* Crema claro (Franja 4) */
+}
+
+/* =========================================
+ALINEACIÓN GLOBAL DE LA PÁGINA
+========================================= */
+body {
+    background-color: var(--background-main); /* Aseguramos que use tu fondo oscuro */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
+    align-items: center; /* Centra la tarjeta horizontalmente en el body */
+    min-height: 100vh;
 }
 
-.lista-productos{
-    width: 100%;
-    padding: 2rem;
+/* =========================================
+TARJETA CONTENEDORA (GLASSMORPHISM)
+========================================= */
+.container {
+    width: 90%; /* Para que guarde margen en pantallas móviles */
+    max-width: 45rem;
+    margin: 4rem auto; /* Separa la tarjeta del nav y la centra */
+    padding: 3rem 2.5rem;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Espaciado interno limpio entre componentes */
+    
+    /* El mismo acabado premium anterior */
+    background-color: var(--background-nav);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    border-radius: 15px;
+    border: 1px solid rgba(229, 218, 201, 0.15); /* Tu color crema traslúcido */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Título de la tarjeta */
+.container h1 {
+    color: var(--text-primary);
+    font-size: 2.4rem;
     text-align: center;
-    border: none;
-    /*PARA UNA SOMBRA DIFUMINADA Y ELEGANTE*/
-    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
-    font-size: 1rem;
-    font-style:italic;
-    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1rem;
 }
 
-#input-price{
+/* =========================================
+ESTILOS DE INPUTS Y SELECT
+========================================= */
+.lista-productos, #input-price {
+    width: 100%;
     padding: 1.5rem;
-    width: 100%;
-    border: none;
-    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.05)
-
+    border-radius: 8px; /* Bordes redondeados sutiles acordes a la tarjeta */
+    border: 1px solid rgba(229, 218, 201, 0.2);
+    background-color: rgba(255, 255, 255, 0.08); /* Fondo semi-oscuro integrado */
+    color: var(--text-primary); /* Texto crema para que se lea perfecto */
+    font-size: 1.6rem;
+    outline: none;
+    transition: all 0.3s ease;
+    text-align: center;
 }
 
-#btn-cotizar{
-    padding: 2rem;
+/* Estilo para las opciones del desplegable (necesitan fondo sólido para leerse) */
+.lista-productos option {
+    background-color: #252b33; 
+    color: var(--text-primary);
+}
+
+#input-price {
+    text-align: center;
+}
+
+/* =========================================
+BOTÓN COTIZAR MODERNO
+========================================= */
+#btn-cotizar {
     width: 100%;
-    font-size: 1.5rem;
+    padding: 1.6rem;
+    font-size: 1.8rem;
+    font-weight: bold;
     border: none;
-    background-color: #f76969;
+    border-radius: 8px;
+    background-color: #f76969; /* Mantenemos tu color coral/rojo que resalta fantástico */
     color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(247, 105, 105, 0.2);
 }
 
-.lista-productos:hover{
-    translate: 0 -0.1rem;
+/* =========================================
+ESTILOS DE LA VENTANA MODAL
+========================================= */
+
+/* El fondo oscuro exterior que cubre toda la pantalla */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px); /* Desenfoque sutil para el fondo general */
+    
+    /* Centrado absoluto de la cajita interna */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    
+    /* Estado inicial: OCULTO */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-#input-price:hover{
-    translate: 0 -0.1rem;
+/* Clase para mostrar la modal desde JavaScript */
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-#btn-cotizar:hover{
-    translate: 0 -0.1rem;
-    background-color: #f86060;
-    box-shadow: 0 0.2rem 0.2rem rgba(252, 98, 98, 0.274);
+/* La cajita de la modal (Estilo Cristal Pizarra) */
+.modal-content {
+    background-color: #2d3339; /* Tu color gris pizarra sólido para que resalte */
+    border: 1px solid rgba(229, 218, 201, 0.2); /* Tu borde crema traslúcido */
+    padding: 3rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 38rem;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    transform: scale(0.7); /* Empieza un poco más pequeña */
+    transition: transform 0.3s ease;
 }
 
+/* Animación de zoom cuando la modal se muestra */
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+/* Textos dentro de la modal */
+#modal-title {
+    color: var(--accent-color); /* Tu color gris taupe o crema */
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+#modal-message {
+    color: var(--text-primary); /* Tu crema claro */
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    font-weight: bold;
+}
+
+/* Botón de cerrar de la modal */
+#modal-close {
+    padding: 1rem 3rem;
+    font-size: 1.6rem;
+    background-color: #f76969; /* Tu color coral identificativo */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+
+/* =========================================
+INTERACTIVIDAD (HOVER & FOCUS)
+========================================= */
+.lista-productos:hover, #input-price:hover {
+    border-color: rgba(229, 218, 201, 0.5);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.lista-productos:focus, #input-price:focus {
+    border-color: #f76969; /* Resalta con el color del botón al escribir */
+    box-shadow: 0 0 8px rgba(247, 105, 105, 0.3);
+}
+
+#btn-cotizar:hover {
+    background-color: #f85353;
+    transform: translateY(-2px); /* Pequeña elevación igual que las tarjetas */
+    box-shadow: 0 6px 20px rgba(247, 105, 105, 0.4);
+}
+
+#btn-cotizar:active {
+    transform: translateY(0); /* Al presionarlo vuelve a su lugar original */
+}
+
+#modal-close:hover {
+    background-color: #f85353;
+}
