@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62,5%;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+body{
+    min-height: 100vh;
+    min-width: 100%;
+    display: flex;
+    padding: 2rem;
+    background-color: papayawhip;
+    justify-content: center;
+}
+
+.container{
+    text-align: center;
+    width: 100%;
+    max-width: 45rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.lista-productos{
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+    border: none;
+    /*PARA UNA SOMBRA DIFUMINADA Y ELEGANTE*/
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    font-size: 1rem;
+    font-style:italic;
+    cursor: pointer;
+}
+
+#input-price{
+    padding: 1.5rem;
+    width: 100%;
+    border: none;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.05)
+
+}
+
+#btn-cotizar{
+    padding: 2rem;
+    width: 100%;
+    font-size: 1.5rem;
+    border: none;
+    background-color: #f76969;
+    color: #ffffff;
+}
+
+.lista-productos:hover{
+    translate: 0 -0.1rem;
+}
+
+#input-price:hover{
+    translate: 0 -0.1rem;
+}
+
+#btn-cotizar:hover{
+    translate: 0 -0.1rem;
+    background-color: #f86060;
+    box-shadow: 0 0.2rem 0.2rem rgba(252, 98, 98, 0.274);
+}
+
