@@ -32,16 +32,55 @@ PROPIEDADES DEL NAV
 .container-nav{
     width: 100%;
     padding: 2rem;
+    background-color: rgb(201, 74, 74);
+    display: flex;
+    justify-content: flex-end; /* Alinea el botón "=" a la derecha */
+    align-items: center;
+    position: relative;
 }
 
 .container-nav_lista{
+    list-style: none;
     display: flex;
-    justify-content: end;
-    gap: 5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    /* Posicionamiento absoluto para que flote debajo del nav */
+    position: absolute;
+    top: 100%; /* Se posiciona justo debajo del contenedor nav */
+    left: 0;
+    width: 100%;
+    background-color: rgb(201, 74, 74);
+    padding: 2rem 0;
+
+    /* Estado inicial: OCULTO */
+    display: none; 
+    z-index: 10; /* Asegura que quede por encima del contenido del main */
+}
+
+/* Esta clase la agregaremos con JavaScript para mostrar el menú */
+.container-nav_lista.isActive {
+    display: flex; 
 }
 
 .nav-elements{
-    font-size: 1.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+/* 
+No olvides que el texto azul y el subrayado es parte del elemento "a" no del "li" por esa razón, aplicamos el text-decoration:none en el elemento "a" y les damos un color blanco
+*/
+.nav-elements a{
+    text-decoration: none;
+    color: white;
+}
+
+.menu-nav{
+    font-size: 2.5rem; /* Un poco más grande para que se note */
+    color: white;
+    user-select: none; /* Evita que se seleccione el texto al hacer click */
 }
 
 /* 
@@ -57,3 +96,49 @@ PROPIEDADES DEL SECTION = BIENVENIDA
 =========================================
 */
 
+/* 
+=========================================
+PSEUDOCLASES
+=========================================
+*/
+
+/* 
+=========================================
+PSEUDOCLASES NAV
+=========================================
+*/
+
+.menu-nav:hover{
+    cursor: pointer;
+    opacity: 0.8; /* Efecto visual sutil al pasar el mouse */
+}
+
+
+/* 
+=========================================
+MEDIA QUARIES
+=========================================
+*/
+
+@media (min-width: 780px){
+    /* 1. Modificamos el contenedor padre para que distribuya el contenido */
+    .container-nav{
+        justify-content: end; /*Los li se van a la derecha */
+        padding:2rem 4rem; /* Un poco más de aire a los lados en pantallas grandes */
+    }
+    
+    /* 2. Reseteamos la lista para que vuelva al flujo normal horizontal */
+    .container-nav_lista{
+        display: flex;
+        flex-direction: row; /* Los elementos se alinean uno al lado del otro */
+        position: static; /* Rompe el absoluto del móvil, vuelve al flujo normal */
+        width: auto; /* Ya no ocupa el 100% de la pantalla */
+        padding: 0; /* Quitamos el relleno del menú móvil */
+        gap: 2rem;
+        background-color: transparent; /* Ya no necesita fondo propio, usa el del nav */
+    }
+    /* 3. Ocultamos el botón de hamburguesa "=" */
+    .menu-nav{
+        display: none; /* Desaparece por completo en pantallas de escritorio */
+    }
+}
