@@ -1,0 +1,68 @@
+:root{
+    --background-main: #1e242b;    /* Azul marino oscuro (Franja 1) */
+    --background-nav: #2d33398a; /* Gris pizarra (Franja 2) */
+    --accent-color: #527b96;       /* Gris taupe (Franja 3) */
+    --text-primary: #e5dac9;       /* Crema claro (Franja 4) */
+}
+
+/* =========================================
+ALINEACIÓN GLOBAL DE LA PÁGINA
+========================================= */
+
+body{
+    background-color: va;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+h1 { 
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.container{
+    width: 90%;
+    max-width: 45rem;
+    margin: 4rem auto;
+    padding: 3rem 2.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    /*El mismo acabado premium que manejamos en las ventanas*/
+    background-color: var(--background-nav);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /*COMPATIBILIDAD CON SAFARI */
+
+    border-radius: 1.5rem;
+    border: 1px solid rgba(229, 218, 201, 0.15); /* Tu color crema traslúcido */;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+#frase{
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.ocultar{
+    display: none;
+}
+
+#btn-generar{
+    border: none;
+    padding: 1.5rem;
+    border-radius: 1rem ;
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.05);
+    background-color: var(--accent-color);
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+

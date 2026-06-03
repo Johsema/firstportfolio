@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/styles.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="./src/styles-principal.css">
+    <link rel="stylesheet" href="./src/styles-frases.css">
+    
+    <title>FRASES</title>
 </head>
 <body>
+    <header class="container-header">
+        <nav class="container-nav">
+            <ul class="container-nav_lista">
+                <li class="nav-elements"><a href="./index.html">Home</a></li>
+                <li class="nav-elements"><a href="./ejercicios.html">Ejercicios</a></li>
+            </ul>
+            <span class="menu-nav">=</span>
+        </nav>
+    </header>
+
+    <h1>GENERADOR DE FRASES ALEATORIAS</h1>
     <section class="container">
         <span  class='ocultar' id="frase">Aquí aparecerá la frase</span>
         <button id="btn-generar">Generar Frase</button>
     </section>
 
+    <script src="frases.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
