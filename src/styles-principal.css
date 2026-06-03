@@ -9,12 +9,37 @@ html{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+/* 
+=========================================
+VARIABLES DE COLOR
+
+=========================================
+*/
+
+:root {
+  --background-main: #1e242b;    /* Azul marino oscuro (Franja 1) */
+  --background-nav: #2d33398a; /* Gris pizarra (Franja 2) */
+  --accent-color: #938a7f;       /* Gris taupe (Franja 3) */
+  --text-primary: #e5dac9;       /* Crema claro (Franja 4) */
+}
+
 body{
     min-width: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    gap:2rem;
+
+    /* CAPA OSCURA + TU IMAGEN DIRECTA DE DRIVE */
+    /* Usamos un linear-gradient encima de la imagen para oscurecerla y garantizar legibilidad */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55),rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/11177799/pexels-photo-11177799.jpeg');
+
+    /* PROPIEDADES CRUCIALES PARA EL BACKGROUND */
+    background-position: center; /* Centra la imagen de fondo */
+    background-size: cover;      /* Hace que la imagen cubra todo el contenedor sin estirarse */
+    background-repeat: no-repeat; /* Evita que la imagen se duplique en mosaico */
 }
+
 /* 
 =========================================
 PROPIEDADES DEL CONTENEDOR HEADER
@@ -32,7 +57,6 @@ PROPIEDADES DEL NAV
 .container-nav{
     width: 100%;
     padding: 2rem;
-    background-color: rgb(201, 74, 74);
     display: flex;
     justify-content: flex-end; /* Alinea el botón "=" a la derecha */
     align-items: center;
@@ -48,11 +72,18 @@ PROPIEDADES DEL NAV
 
     /* Posicionamiento absoluto para que flote debajo del nav */
     position: absolute;
-    top: 100%; /* Se posiciona justo debajo del contenedor nav */
+    top: 0; /* Cambiado de 100% a 0 para que suba hasta el tope */
     left: 0;
     width: 100%;
-    background-color: rgb(201, 74, 74);
-    padding: 2rem 0;
+
+    /* Le damos espacio arriba para que los enlaces bajen 
+       y dejen libre el área del botón "=" */
+    padding: 8rem 0 3rem 0;
+
+    /* El truco de magia: fondo negro muy transparente + desenfoque */
+    background-color: rgba(0, 0, 0, 0.6); /* El 0.6 es 60% de opacidad */
+    backdrop-filter: blur(10px);         /* Desenfoca lo que está atrás */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidad para Safari */
 
     /* Estado inicial: OCULTO */
     display: none; 
@@ -66,7 +97,7 @@ PROPIEDADES DEL NAV
 
 .nav-elements{
     font-size: 2rem;
-    color: white;
+    color:  var(--text-primary);
 }
 
 /* 
@@ -74,13 +105,28 @@ No olvides que el texto azul y el subrayado es parte del elemento "a" no del "li
 */
 .nav-elements a{
     text-decoration: none;
-    color: white;
+    color: var(--text-primary);
+
+    /* ¡IMPORTANTE! Las etiquetas <a> son inline por defecto y no aceptan bien el padding vertical. 
+       Cambiarlo a inline-block soluciona esto por completo */
+    display: inline-block; 
+    
+    /* Agregamos el espaciado: 0.8rem arriba/abajo y 1.6rem a los lados */
+    padding: 0.8rem 1.6rem; 
+    
+    /* Ya dejamos los bordes redondeados preparados desde aquí */
+    border-radius: 0.8rem; 
+    
+    /* Opcional: Hace que el fondo aparezca suavemente en lugar de golpe */
+    transition: background-color 0.2s ease;
 }
 
 .menu-nav{
     font-size: 2.5rem; /* Un poco más grande para que se note */
-    color: white;
+    color: var(--text-primary);
     user-select: none; /* Evita que se seleccione el texto al hacer click */
+    position: relative; /* Necesario para que el z-index funcione */
+    z-index: 20;        /* Mayor al de la lista (10), así queda flotando al frente */
 }
 
 /* 
@@ -88,7 +134,30 @@ No olvides que el texto azul y el subrayado es parte del elemento "a" no del "li
 PROPIEDADES DEL CONTENEDOR MAIN
 =========================================
 */
+.container-main {
+    width: 100%;
+}
 
+.bienvenida{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 7rem 2rem 7rem 2rem;
+    border-radius: 2rem;
+
+}
+
+.bienvenida h1{
+    padding-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.bienvenida p{
+    color: var(--accent-color);
+    max-width: 35rem;
+    text-align: center;
+}
 
 /* 
 =========================================
@@ -113,6 +182,9 @@ PSEUDOCLASES NAV
     opacity: 0.8; /* Efecto visual sutil al pasar el mouse */
 }
 
+.nav-elements a:hover{
+    background-color: #938a7f9d;
+}
 
 /* 
 =========================================
