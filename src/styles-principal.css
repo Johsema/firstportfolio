@@ -21,6 +21,7 @@ VARIABLES DE COLOR
   --background-nav: #2d33398a; /* Gris pizarra (Franja 2) */
   --accent-color: #938a7f;       /* Gris taupe (Franja 3) */
   --text-primary: #e5dac9;       /* Crema claro (Franja 4) */
+  --text-secondary: #e5dac93f;
 }
 
 body{
@@ -99,7 +100,15 @@ PROPIEDADES DEL NAV
 /* Esta clase la agregaremos con JavaScript para mostrar el menú */
 .container-nav_lista.isActive {
     display: flex; 
+    
 }
+
+.menu-nav.isActive{
+    background-color: transparent;
+    backdrop-filter: none;
+    box-shadow: none; /* Por si le pusiste alguna sombra */
+}
+
 
 .nav-elements{
     font-size: 2rem;
@@ -128,7 +137,16 @@ No olvides que el texto azul y el subrayado es parte del elemento "a" no del "li
 }
 
 .menu-nav{
-    font-size: 2.5rem; /* Un poco más grande para que se note */
+    /* FORMA DEL BOTÓN DE HAMBURGUESA*/
+    background-color: var(--background-nav);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(229, 218, 201, 0.1);
+    transition: background-color 0.3s ease;
+    padding: 0.2rem 1.5rem 0.2rem 1.5rem;
+    border-radius: 5rem;
+
+    font-size: 3rem; /* Un poco más grande para que se note */
     color: var(--text-primary);
     user-select: none; /* Evita que se seleccione el texto al hacer click */
     position: relative; /* Necesario para que el z-index funcione */
