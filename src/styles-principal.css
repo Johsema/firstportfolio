@@ -253,12 +253,104 @@ CONTROL Y ESTILO DE LOS SVG PUROS
     filter: grayscale(40%) opacity(0.8);
 }
 
+/* =========================================
+Ventana de información de lenguajes
+========================================= */
+/* 1. El Fondo Oscurecido (Overlay) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Oscurece el fondo */
+    backdrop-filter: blur(8px);           /* Desenfoque para la web de fondo */
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;              /* Centra la tarjeta horizontalmente */
+    align-items: center;                  /* Centra la tarjeta verticalmente */
+    z-index: 1000;                        /* Asegura que esté por encima de todo */
+    transition: opacity 0.3s ease;
+}
+/* 2. La Tarjeta Central */
+.language-description-container{
+    background-color: var(--background-nav);
+    border-radius: 12px;
+    border: 1px solid rgba(229, 218, 201, 0.1);
+    padding: 2.5rem;
+    max-width: 60rem;                   /*Controla el ancho máximo*/
+    width: 90%;                         /* Responsivo en móviles*/
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+/* 3. El Encabezado (Título y X) */
+.language-tittle-container{
+    position: relative;                     /* Obligatorio para que la X se posicione respecto a este contenedor */
+    display: flex;
+    justify-content: center;                /* Centra el H2 de forma matemática y absoluta */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;                    /* Le da espacio al párrafo abajo */
+}
+
+.language-description-container h2{
+    color: var(--text-primary);  
+    margin: 0;
+    text-align: center;
+    width: auto;                            /* Evita que ocupe todo el ancho para no chocar con la X */
+}
+
+/* 4. Botón de Cerrar (La X) */
+.close-btn {
+    position: absolute;                    /* Se sale del flujo y no empuja al título */
+    top: 50%;                               /* Centrado vertical perfecto */
+    transform: translateY(-50%);
+    right: 0;                             /* La empuja completamente al borde derecho */
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.language-description-container p {
+    color: var(--text-primary);           /* Asegura legibilidad del párrafo */
+    line-height: 1.7;
+    text-align: center;
+    /* Limitamos el ancho del texto en PC para que mantenga la estructura elegante */
+    max-width: 90%;           
+    margin: 0 auto;           /* Centra el bloque del párrafo dentro de la tarjeta */
+}
+
+/* 5. Clase utilitaria para ocultar la ventana */
+.hidden {
+    opacity: 0;
+    pointer-events: none;                 /* Evita que se pueda clickear estando invisible */
+}
+
 /* 
 =========================================
 PSEUDOCLASES
 =========================================
 */
+.card-item:hover {
+    transform: translateY(-4px); /* Sube la tarjeta suavemente */
+    border-color: rgba(229, 218, 201, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
 
+.card-item:hover .icono-svg {
+    transform: scale(1.1); /* Efecto de crecimiento leve del logo */
+    filter: grayscale(0%) opacity(1); /* Recupera su color original brillante */
+}
+
+.close-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);                /* Efecto sutil al pasar el mouse */
+}
 /* 
 =========================================
 PSEUDOCLASES NAV
@@ -310,13 +402,3 @@ MEDIA QUARIES
     }
 }
 
-.card-item:hover {
-    transform: translateY(-4px); /* Sube la tarjeta suavemente */
-    border-color: rgba(229, 218, 201, 0.3);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
-
-.card-item:hover .icono-svg {
-    transform: scale(1.1); /* Efecto de crecimiento leve del logo */
-    filter: grayscale(0%) opacity(1); /* Recupera su color original brillante */
-}
