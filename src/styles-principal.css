@@ -2,6 +2,8 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    /*Elimina el recuadro azul al presionar algo en la página web desde el celular */
+    -webkit-tap-highlight-color: transparent;
 }
 
 html{
@@ -21,7 +23,7 @@ VARIABLES DE COLOR
   --background-nav: #2d33398a; /* Gris pizarra (Franja 2) */
   --accent-color: #938a7f;       /* Gris taupe (Franja 3) */
   --text-primary: #e5dac9;       /* Crema claro (Franja 4) */
-  --text-secondary: #e5dac93f;
+    --text-secondary: #e5dac93f;
 }
 
 body{
