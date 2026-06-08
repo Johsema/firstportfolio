@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../src/styles-principal.css">
+    <link rel="stylesheet" href="./css/styles-to-do-list.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#4a90e2">
+    <title>TO DO LIST BY JOHSEMA</title>
+</head>
+<body>
+    <header class="container-header">
+        <nav class="container-nav">
+            <ul class="container-nav_lista">
+                <li class="nav-elements"><a href="../../index.html">Home</a></li>
+                <li class="nav-elements"><a href="../../ejercicios-indice.html">Ejercicios</a></li>
+            </ul>
+            <span class="menu-nav">=</span>
+        </nav>
+    </header>
+    <h1>TO DO LIST</h1>
+    <section class="container">
+        <!-- Iniciamos con el sol minimalista de trazo lineal -->
+        <div class="container-tittle">
+            <h2>WELCOME, HAVE A NICE DAY!</h2>
+            <button id="theme-toggle" class="theme-btn" aria-label="Cambiar modo de color">☼</button>
+        </div>
+        <div class="container-newTask">
+            <input type="text" id="new-task" placeholder="Ingresa tu tarea">
+            <button id="add-task">Agregar</button>
+        </div>
+        <ul id="task-list"></ul>
+        
+    </section>
+
+    <script src="./to-do-list-app.js"></script>
+    <script src="../../main.js"></script>
+</body>
+</html>

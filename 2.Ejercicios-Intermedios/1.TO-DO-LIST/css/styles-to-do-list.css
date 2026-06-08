@@ -1,0 +1,260 @@
+/* COLORES POR DEFECTO MODO CLARO */
+:root {
+    --bg-principal: #f4f7f6;
+    --bg-contenedor: #ffffff;
+    --texto-principal: #333333;
+    --texto-secundario: #ffffff;
+    --borde: #e0e0e0;
+    --bg-tarea-hover: #f1f5f9;
+    --borde-tarea-hover: #cbd5e1;
+    --texto-boton-add: #ffffff; /* Ajustado a blanco para que resalte con el azul */
+}
+
+/* COLORES CUANDO LA PÁGINA TENGA LA CLASE .DARK-MODE */
+.dark-mode { 
+    --bg-principal: #121212;
+    --bg-contenedor: #1e1e1e;
+    --texto-principal: #e0e0e0;
+    --texto-secundario: #a0a0a0;
+    --borde: #333333;
+    --bg-tarea-hover: #2a2a2a;      /* Color adaptado para el hover en modo oscuro */
+    --borde-tarea-hover: #444444;   /* Borde adaptado para el hover en modo oscuro */
+    --texto-boton-add: #ffffff;
+}
+
+body {
+    /* Usamos Flexbox para centrar toda la app en la pantalla */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-principal);
+    color: var(--texto-principal);
+    transition: background-color 0.3s, color 0.3s; /* Suaviza el cambio de color */
+    min-height: 100vh;
+}
+
+h1{
+    color: var(--texto-secundario);
+    font-size: 2.4rem;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1rem;
+}
+/* ==========================================
+   2. CONTENEDOR PRINCIPAL (TARJETA)
+   ========================================== */
+.container {
+    background-color: var(--bg-contenedor);
+    border: 1px solid var(--borde);
+    transition: background-color 0.3s, border 0.3s;
+    width: 90%;
+    max-width: 45rem;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* Un pelín más de espacio general para que respire el diseño */
+}
+
+/* NUEVO: Contenedor que alinea el título y el botón en la misma línea */
+.container-tittle {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center;     /* Centra verticalmente el texto y el ícono */
+    position: relative;      /* Permite que el botón flote sin empujar el título */
+    width: 100%;
+}
+
+h2 {
+    font-size: 2rem; /* Lo bajamos un poquito para que se vea más fino */
+    color: var(--texto-principal);
+    text-align: center;
+    letter-spacing: 0.5px;
+    width: 100%;
+}
+/* ==========================================
+   6. BOTÓN ESTILO DIBUJO A LÁPIZ
+   ========================================== */
+.theme-btn {
+    position: absolute; /* ¡La magia! Flota independientemente del flujo */
+    right: 0;          /* Se pega al extremo derecho de la cabecera */
+    background: none;
+    border: none;
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: var(--texto-principal);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.3s;
+}
+
+.theme-btn:hover {
+    background-color: var(--bg-tarea-hover);
+    transform: scale(1.1);
+}
+
+.theme-btn:active {
+    transform: scale(0.9);
+}
+
+/* ==========================================
+   3. SECCIÓN DE NUEVA TAREA (INPUT + BOTÓN)
+   ========================================== */
+.container-newTask {
+    /* Flexbox en fila para alinear el input y el botón horizontalmente */
+    display: flex;
+    gap: 10px;
+}
+
+#new-task {
+    flex: 1; /* Hace que el input ocupe todo el espacio sobrante */
+    padding: 12px 16px;
+    background-color: var(--bg-contenedor); /* ¡Aplicado! Para que el input no se quede blanco en modo oscuro */
+    color: var(--texto-principal);          /* ¡Aplicado! Para que las letras que escribes cambien de color */
+    border: 2px solid var(--borde);          /* ¡Aplicado! */
+    border-radius: 8px;
+    font-size: 1.4rem;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s, color 0.3s;
+}
+
+#new-task:focus {
+    border-color: #4a90e2;
+}
+
+#add-task {
+    padding: 12px 24px;
+    background-color: #4a90e2;
+    color: #ffffff !important; /* Ajustado con variable para asegurar legibilidad */
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#add-task:hover {
+    background-color: #357abd;
+}
+
+/* ==========================================
+   4. LISTA DE TAREAS
+   ========================================== */
+#task-list {
+    list-style: none;
+    /* Flexbox vertical para separar cada elemento li */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Cada ítem de la lista (li) */
+#task-list li {
+    background-color: var(--bg-contenedor);
+    padding: 12px 16px;
+    border: 1px solid var(--borde); /* ¡Aplicado! El borde rígido viejo se mimetiza ahora */
+    border-radius: 8px;
+    font-size: 1.6rem;
+    color: var(--texto-principal); /* ¡Aplicado! El color '#444' fijo se ponía invisible en el fondo oscuro */
+    cursor: pointer;
+    transition: all 0.2s ease, background-color 0.3s, border-color 0.3s;
+
+    /* ¡Poder de Flexbox aquí! Alinea el texto a la izquierda 
+       y empuja el botón "Eliminar" totalmente a la derecha */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#task-list li:hover {
+    background-color: var(--bg-tarea-hover); /* ¡Aplicado! Variable dinámica para el hover */
+    border-color: var(--borde-tarea-hover);   /* ¡Aplicado! Variable dinámica para el hover */
+}
+
+/* Botón Eliminar dentro del li */
+.delete {
+    padding: 6px 12px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.delete:hover {
+    background-color: #d9363e;
+}
+
+/* Estilo para cuando la tarea esté completada */
+.completado {
+    text-decoration: line-through;
+    opacity: 0.5;
+    /* Dejamos estos colores fijos porque el tono azul/celeste suave 
+       de completado combina genial y se lee bien en ambos modos */
+    background-color: #e6f7ff !important;
+    border-color: #bae7ff !important;
+    color: #444444 !important; /* Forzamos color oscuro aquí para que siempre sea legible sobre el fondo celeste */
+}
+
+/* ==========================================
+   5. DISEÑO RESPONSIVO (CELULARES)
+   ========================================== */
+@media (max-width:480px) {
+    body {
+        padding: 10px; /* Corregido: Te faltaba el 'px' al final de tu reseteo */
+    }
+
+    .container {
+        width: 100%;
+        padding: 15px;
+        gap: 15px; /* Reducimos el espacio general en móviles */
+    }
+
+    /* ¡LA SOLUCIÓN PARA MÓVILES! Cambiamos el orden de la cabecera */
+    .container-tittle {
+        flex-direction: column; /* Apila el botón arriba y el título abajo */
+        gap: 10px;
+        position: static; /* Le quitamos el comportamiento flotante en celulares */
+    }
+
+    h2 {
+        font-size: 1.7rem; /* Achicamos un pelín el título para que quepa en una sola línea */
+        order: 2; /* Empuja el título hacia abajo */
+    }
+
+    .theme-btn {
+        position: static; /* Deja de flotar a la derecha */
+        align-self: center; /* Se centra perfectamente solito arriba */
+        order: 1; /* Pone el sol/luna arriba del título */
+        padding: 4px;
+        font-size: 1.4rem;
+    }
+
+    .container-newTask {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #new-task {
+        width: 100%;
+        font-size: 1.4rem;
+    }
+
+    #add-task {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+
+    #task-list li {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
