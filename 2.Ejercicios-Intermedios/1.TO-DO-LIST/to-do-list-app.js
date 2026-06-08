@@ -1,3 +1,7 @@
+const modal = document.getElementById('custom-modal');
+const modalMessage = document.getElementById('modal-message');
+const modalClose = document.getElementById('modal-close');
+
 class TodoList {
     // El constuctor define el "estado inicial de cada instancia"
     // Esto equivale a lo que ponías directamente en la función constructora
@@ -23,13 +27,56 @@ class TodoList {
             if (e.key === 'Enter') this.addTask()
         })
     }
+
+    // 🔥 FUNCIÓN PARA SANEAR EL TEXTO (Previene XSS e inyecciones de código)
+    sanitizeHTML(str) {
+        return str.replace(/[&<>"']/g, (match) => {
+            const escapeChars = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;'
+            };
+            return escapeChars[match];
+        });
+    }
+
     // MÉTODO PARA AGREGAR UNA NUEVA TAREA
     addTask(){
-        const taskText = this.task.value.trim()
+        let taskText = this.task.value.trim()
         // VERIFICAMOS QUE EL IMPUT NO ESTÉ VACIO
         if (taskText===''){
-            return alert ('Por favor agrega una tarea')
+            modalMessage.textContent = 'Por favor introduce una tarea ✍️';
+            modal.classList.add('show');
+            return; // Detiene la ejecución aquí si está mal
         }
+
+        // 🔥 2. NUEVA VALIDACIÓN: Longitud mínima (Por ejemplo, mínimo 3 caracteres)
+        if (taskText.length < 3) {
+            this.showModal('La tarea es muy corta (debe tener al menos 3 caracteres).');
+            return;
+        }
+
+        // 2. Validación: Control de longitud máxima (Evita romper la UI)
+        if (taskText.length > 70) {
+            modalMessage.textContent = 'La tarea es muy larga (máximo 70 caracteres). ✍️';
+            modal.classList.add('show');
+            return; // Detiene la ejecución aquí si está mal
+        }
+
+        // 3. Validación: Evitar que sean solo números o puros símbolos extraños
+        // Explicación de la Regex: Exige que al menos exista una letra o número en el texto
+        const validTextRegex = /[a-zA-Z0-9]/;
+        if (!validTextRegex.test(taskText)) {
+            modalMessage.textContent = 'La tarea debe contener al menos una letra o número válido. ✍️';
+            modal.classList.add('show');
+            return; // Detiene la ejecución aquí si está mal
+        }
+
+        // 4. Saneamos el texto antes de procesarlo
+        taskText = this.sanitizeHTML(taskText);
+
         // Creamos el elemento con un objeto de configuración falso por defecto
         const taskItem = this.createTaskElement(taskText, false)
         this.taskList.appendChild(taskItem)
@@ -41,8 +88,13 @@ class TodoList {
     // MÉTODO PARA CREAR LOS ELEMENTOS DE LA LISTA DE TAREAS
     //Modificamos este método para que acepte si la tarea ya viene 'Completada' desde el inicio
     createTaskElement(text, isCompleted){
-        const li = document.createElement('li')
-        li.innerText = text
+        const li = document.createElement('li');
+        // Usamos un contenedor span independiente para el texto de la tarea.
+        // Esto evita que al hacer un replace('Eliminar') se altere el contenido del usuario.
+        const textSpan = document.createElement('span');
+        textSpan.className = 'task-text';
+        textSpan.innerHTML = text; // Seguro porque ya fue saneado en addTask y loadTasks
+        li.appendChild(textSpan);
 
         //Si la tarea ya está completada, aplicamos el estilo CSS
         if (isCompleted){
@@ -76,16 +128,17 @@ class TodoList {
         //Seleccionamos todos los 'li' actuales que viven dentro de la lista
         const taskElements = this.taskList.querySelectorAll('li')
 
-        taskElements.forEach(li=>{
-            //El texto de tu li incluye la palabra Eliminar del botón
-            //Con .replace() limpiamos esa palabra para guardar solo la tarea real
-            const text = li.innerText.replace('Eliminar','').trim()
-            const isCompleted = li.classList.contains('completado')
-
-            //Guardamos cada tarea como un objeto estructurado 
-            arrayTasks.push({ text, isCompleted })
-        })
-        
+        taskElements.forEach(li => {
+            // 🔥 AQUÍ ESTÁ LA CORRECCIÓN:
+            // Debemos buscar el 'span' que vive dentro de ESTE 'li' usando querySelector
+            const textSpan = li.querySelector('.task-text');
+            
+        if (textSpan) {
+                const text = textSpan.innerHTML; // Mantiene el texto saneado
+                const isCompleted = li.classList.contains('completado');
+                arrayTasks.push({ text, isCompleted });
+            }
+        });
         // CONVERTIMOS EL ARREGLO DE OBJETOS A UN STRING DE JSON Y LO GUARDAMOS
         localStorage.setItem('myTodoList', JSON.stringify(arrayTasks))
     }
@@ -97,17 +150,31 @@ class TodoList {
         //Si no hay nada guardado todavía, terminamos la función
         if(!savedTasks) return
 
-        //Convertimos el String de JSON de vuelta a un arreglo de JavaScript
-        const tasks = JSON.parse(savedTasks)
-
-        //Recorremos el arreglo y recreamos cada elemento dle DOM
-        tasks.forEach(task => {
-            const taskItem = this.createTaskElement(task.text,task.isCompleted)
-            this.taskList.appendChild(taskItem)
-        })
+        try {
+            const tasks = JSON.parse(savedTasks);
+            tasks.forEach(task => {
+                // Saneamos de nuevo al cargar por si acaso el LocalStorage fue manipulado externamente
+                const safeText = this.sanitizeHTML(task.text);
+                const taskItem = this.createTaskElement(safeText, task.isCompleted);
+                this.taskList.appendChild(taskItem);
+            });
+        } catch (e) {
+            console.error("Error al leer el almacenamiento local, datos corruptos.", e);
+            localStorage.removeItem('myTodoList'); // Limpia datos corruptos si alguien metió mano al JSON
+        }
+    }
+    // Helper dinámico para reutilizar la modal con diferentes mensajes
+    showModal(message) {
+        if (modalMessage) modalMessage.innerText = message;
+        modal.classList.add('show');
     }
 
 }
+
+// Escuchador para cerrar la modal (Se queda afuera para cuidar la memoria)
+modalClose.addEventListener('click', () => {
+    modal.classList.remove('show');
+});
 
 document.addEventListener('DOMContentLoaded', () => {
 const myApp = new TodoList()

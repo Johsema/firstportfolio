@@ -205,6 +205,84 @@ h2 {
     color: #444444 !important; /* Forzamos color oscuro aquí para que siempre sea legible sobre el fondo celeste */
 }
 
+/* =========================================
+ESTILOS DE LA VENTANA MODAL
+========================================= */
+
+/* El fondo oscuro exterior que cubre toda la pantalla */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px); /* Desenfoque sutil para el fondo general */
+    
+    /* Centrado absoluto de la cajita interna */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    
+    /* Estado inicial: OCULTO */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Clase para mostrar la modal desde JavaScript */
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* La cajita de la modal (Estilo Cristal Pizarra) */
+.modal-content {
+    background-color: #2d3339; /* Tu color gris pizarra sólido para que resalte */
+    border: 1px solid rgba(229, 218, 201, 0.2); /* Tu borde crema traslúcido */
+    padding: 3rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 38rem;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    transform: scale(0.7); /* Empieza un poco más pequeña */
+    transition: transform 0.3s ease;
+}
+
+/* Animación de zoom cuando la modal se muestra */
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+/* Textos dentro de la modal */
+#modal-title {
+    color: var(--accent-color); /* Tu color gris taupe o crema */
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+#modal-message {
+    color: var(--text-primary); /* Tu crema claro */
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    font-weight: bold;
+}
+
+/* Botón de cerrar de la modal */
+#modal-close {
+    padding: 1rem 3rem;
+    font-size: 1.6rem;
+    background-color: #f76969; /* Tu color coral identificativo */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
 /* ==========================================
    5. DISEÑO RESPONSIVO (CELULARES)
    ========================================== */

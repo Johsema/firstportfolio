@@ -19,7 +19,9 @@
             <span class="menu-nav">=</span>
         </nav>
     </header>
+
     <h1>TO DO LIST</h1>
+
     <section class="container">
         <!-- Iniciamos con el sol minimalista de trazo lineal -->
         <div class="container-tittle">
@@ -31,8 +33,14 @@
             <button id="add-task">Agregar</button>
         </div>
         <ul id="task-list"></ul>
-        
     </section>
+
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modal-message">Por favor, ingresa una tarea</p>
+            <button id="modal-close">Aceptar</button>
+        </div>
+    </div>
 
     <script src="./to-do-list-app.js"></script>
     <script src="../../main.js"></script>
