@@ -1,0 +1,241 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+html{
+    font-size: 62.5%;
+}
+body{
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+/* ===============================================
+PROPIEDADES DEL PRIMER CONTENEDOR CHECK THE BEST FOOD
+===============================================
+*/
+.first-container{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-auto-rows: 400px;
+    border-bottom: 1px solid #ddd;
+    gap: 40px;
+}
+
+.description{
+    align-self: center;
+}
+.description h1{
+    color: #333;
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.description p{
+    color: #666;
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.description button{
+    border: none;
+    padding: 12px 32px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.4rem;
+    background-color: #fb8c00;
+    box-shadow: 0 8px 24px rgba(251, 140, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.img-item1{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ===============================================
+PROPIEDADES DEL SEGUNDO CONTENEDOR OUR SERVICES
+===============================================
+*/
+.second-principal-container{
+    display: grid;
+    grid-template-rows: auto;
+    margin: 60px 0;
+}
+
+.second-tittle{
+    text-align: center;
+    color: #333;
+    font-size: 3.5rem;
+    font-weight: bolder;
+    margin-bottom: 40px;
+}
+
+.second-container{
+    display: grid;
+    /* FIJAMOS 4 COLUMNAS: 2 para el bloque grande y 2 para las pequeñas */
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 160px; /* Ajuste para que el mosaico sea simétrico */
+    gap: 20px;
+    justify-content: center;
+}
+
+.img-item2{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* Ocupa 2 columnas de ancho y 2 filas de alto */
+.img-item2_big{
+    grid-area: 1 / 1 / 3 / 3;
+}
+
+/* ===============================================
+PROPIEDADES DEL TERCER CONTENEDOR HOME MENU
+===============================================
+*/
+.third-container{
+    display: grid;
+    grid-template-rows: auto;
+    margin: 60px 0;
+}
+
+.third-tittle{
+    text-align: center;
+    color: #333;
+    font-size: 3.5rem;
+    font-weight: bolder;
+    margin-bottom: 40px;
+}
+
+.third-img-container{
+    display: grid;
+    /* SOLUCIÓN: Forzamos exactamente 5 columnas en una sola fila */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px;
+    justify-content: center;
+}
+
+.img-item3{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* ==============================================
+==============================================
+RESPONSIVE DESIGN (MEDIA QUERIES)
+==============================================
+==============================================
+*/
+
+/* ------------------------------------------------------------------
+   PUNTO DE QUIEBRE: TABLETS Y PANTALLAS MEDIANAS (Max 768px)
+   ------------------------------------------------------------------ */
+@media screen and (max-width: 900px){
+    
+    .first-container {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .img-item1 {
+        display: block;
+        max-height: 300px;
+    }
+
+    /* En tablet bajamos a un diseño de 2 columnas para el mosaico */
+    .second-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 150px; 
+        gap: 15px;
+    }
+
+    /* En tablet el menú se acomoda en un flujo de rejilla más cómodo */
+    .third-img-container {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* ------------------------------------------------------------------
+   PUNTO DE QUIEBRE: TELÉFONOS (Max 480px)
+   ------------------------------------------------------------------ */
+@media screen and (max-width: 480px){
+
+    .description h1 {
+        font-size: 3rem;
+    }
+
+    /* OUR SERVICES: Una sola columna vertical sin recortes */
+    .second-container {
+        grid-template-columns: 1fr; 
+        grid-auto-rows: auto; 
+        gap: 20px;
+    }
+
+    .img-item2_big {
+        grid-area: auto; 
+    }
+
+    .img-item2 {
+        object-fit: contain; 
+        height: auto; 
+    }
+
+    /* HOME MENU: Una sola columna vertical limpia sin recortes */
+    .third-img-container {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto; 
+        gap: 25px;
+        padding: 0 10px;
+    }
+
+    .img-item3 {
+        object-fit: contain;
+        height: auto; 
+        box-shadow: none;
+    }
+}
+
+/* ==============================================
+PSEUDOCLASES (INTERACCIONES MODERNAS)
+==============================================
+*/
+.description button:hover{
+    background-color: #e47f03;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(251, 140, 0, 0.4);
+}
+
+.img-item2:hover, .img-item3:hover{
+    transform: scale(1.03);
+}
+
+
