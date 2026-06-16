@@ -233,7 +233,7 @@ html {
   gap: 30px;
 }
 .gallery .gallery-images img {
-  width: 400px;
+  width: 350px;
   height: 350px;
   -o-object-fit: cover;
      object-fit: cover;
