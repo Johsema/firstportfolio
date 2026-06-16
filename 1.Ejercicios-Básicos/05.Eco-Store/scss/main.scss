@@ -1,0 +1,448 @@
+$primary-color: #FFEFE7;
+$secondary-color: #FFDAC6;
+$tertiary-color: #BABD8D;
+$primary-text-color: #7C6A0A;
+$quaternary-color: #FA9500;
+$font-stack: "IBM Plex Sans", sans-serif;
+$paragraph-size: 1.6em;  /* 1em = 16px*/
+
+/* Datos según google fonts
+$font-stack:(
+  font-family: "IBM Plex Sans", sans-serif,
+  font-optical-sizing: auto,
+  font-weight: 400,
+  font-style: normal,
+  font-variation-settings: "wdth" 100,
+);
+*/
+
+@mixin flexCenter($direction,$content,$align){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $content;
+    align-items: $align;
+}
+
+@mixin  buttonStyle{
+    button{
+        background: none;
+        border-style: none;
+    }
+}
+
+@mixin dimension($width, $height){
+    width: $width;
+    height: $height;
+}
+
+@mixin marginPadding($margin, $padding){
+    margin: $margin;
+    padding: $padding;
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+html{
+    font-size: 62.5%;
+}
+
+.eco-store-container{
+    background-color: $primary-color;
+    width: 92%;
+    height: 100%;
+    max-width: 1400px;
+    margin: 3rem auto 5rem auto;
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: $font-stack;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* En lugar de space-evenly */
+    gap: 2rem;
+}
+
+.header-section-eco-store{
+    @include dimension(100%,100px);
+        .nav-section-eco-store{
+            width: 100%;
+            @include marginPadding(0 auto , 15px 15px 15px 28px);
+            @include flexCenter(row,space-between ,center );
+            background-color: $primary-color;
+            color: $primary-text-color;
+            p{
+                font-size: $paragraph-size ;
+                padding: 30px;
+            }
+            .icons{
+                display: flex;
+                gap: 15px;
+                @include buttonStyle();
+            }
+        }
+}
+
+.main-section-eco-store{
+    padding: 0 30px 30px 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.article-section-eco-store{
+    width: auto;
+    color: $primary-text-color;
+    text-align: center;
+    margin-bottom:30px;
+
+    .impact-section{
+        @include flexCenter(column,space-evenly ,center );
+        gap:25px;
+    }
+    h1{
+        font-size:30px;
+        @include marginPadding(0,0);
+    }
+    p{
+        line-height: 1.6;
+        font-size: $paragraph-size;
+            
+        }
+    @include buttonStyle();    
+    button{
+        width: 280px;
+        padding: 20px;
+        background-color: $quaternary-color;
+        border-radius: 35px;
+        color: white;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+    .image-section{
+        img{
+            display: none;
+        }
+    }
+}
+
+.product-section{
+    @include dimension(auto,auto);
+    h2{
+        color: $primary-text-color;
+        font-size: 3em;
+        text-align: center;
+    }
+    .healthcare{
+        h2{
+            font-weight: 300;
+            padding-bottom: 20px;
+        }
+
+        .card-section{
+            @include dimension(auto,auto );
+            @include flexCenter(column,space-evenly,center) ;
+            gap: 10px;
+            padding-bottom: 25px;
+        }
+
+        .product-card{
+            @include dimension(250px,auto );
+            background-color: $secondary-color ;
+            color: $primary-text-color;
+            padding: 10px 10px 30px 10px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            .icon{
+                width: 100%;
+                @include flexCenter(row,flex-end,center);
+                cursor: pointer;
+                svg{
+                    @include dimension(18px,18px);
+                }
+            }
+
+            .product-image{
+                @include dimension(100%,auto );
+                @include flexCenter(row,center,center);
+
+                img{
+                    @include dimension(200px, 220px );
+                    object-fit: cover;
+                    border-radius: 10px;
+                }  
+            }
+            h3{
+                font-size: 1.5em;
+            }
+            p{
+                font-size:1.1em;
+            }
+        }
+    }  
+    
+    .furniture { 
+        @extend .healthcare;
+        .product-card{
+            background-color: $tertiary-color;
+            color: white ;
+        }
+    }
+}
+
+.about-us{
+    h2{
+        font-weight: bold;
+        padding-bottom: 20px;
+        color: $primary-text-color;
+        font-size: 3em;
+        text-align: center
+    }
+    .mission-section{
+        @include flexCenter(row,center,center );
+        gap: 35px;
+        padding-bottom: 40px;
+        .earth{
+            @include flexCenter(column,center,center);
+            width: 100%;
+            gap: 30px;
+            color: #E86424;
+            img{
+                width: 130px;
+                height: 130px;
+                object-fit: contain;
+            }
+            p{
+                text-align: center;
+                font-size: $paragraph-size;
+                width: 100%
+            }
+        }
+    }
+    .innovation{
+        @extend .earth;
+    }
+}
+
+.gallery{
+    padding-bottom: 40px;
+    h2{
+        font-weight: bold;
+        padding-bottom: 20px;
+        color: $primary-text-color;
+        font-size: 3em;
+        text-align: center
+    }
+    .gallery-images{
+        @include flexCenter(column,center,center);
+        gap: 30px;
+        img{
+            width: 400px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+    }
+}
+
+.location{
+    color: #E86424;
+    text-align: center;
+    h2{
+        font-weight: bold;
+        padding-bottom: 20px;
+        font-size: 3em;
+        color: $primary-text-color;
+    }
+    h3{
+        font-size: 2em;
+    }
+    p{
+        font-size: $paragraph-size;
+    }
+    .map{
+        @include flexCenter(row,center ,center );
+        padding-bottom: 40px;
+        img{
+            width: 100%;
+        }
+    }
+}
+
+.footer-eco-store{
+    @include dimension(100%,auto);
+    background-color: $quaternary-color;
+    color: white;
+    padding: 40px;
+    h3{
+        padding-bottom:15px;
+        font-size: 2em;
+    }
+    p{
+        padding-bottom: 15px;
+        font-size: 1.3em
+    }
+    .social-media{
+        @include flexCenter(row,center ,center );
+        gap: 30px;
+        padding-bottom: 40px;
+    }
+    
+}
+
+/* 
+--------------------------------------------------------------
+MEDIA QUERY PARA PANTALLAS GRANDES
+-----------------------------------------------------------------
+*/
+@media (min-width:720px){
+    .header-section-eco-store{
+        width: 100%;
+        height: auto;
+        max-width: 2000px;
+        margin: 0 auto;
+    }
+    .main-section-eco-store{
+        width: 100%;
+        max-width: 2000px;
+        @include marginPadding(0 auto,0 30px 30px 30px);
+    }
+
+    .article-section-eco-store{
+        @include dimension(100%,450px );
+        @include flexCenter(row,space-between ,center );
+        padding-left: 30px;
+        padding-right: 30px;
+        
+        .impact-section{
+            /* flex: grow shrink basis */
+            flex: 1 1 350px; /* Crece si hay espacio, se encoge si no, pero idealmente busca medir mínimo 350px */
+            @include flexCenter(column,center,flex-start);
+        }
+        h1{
+            text-align: left;
+        }
+        p{
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+            }
+        .image-section{
+            /* flex: grow shrink basis */
+            flex: 1 1 300px; /* Impide que la columna baje de los 280px de ancho */
+            max-width: 400px;
+            height: 100%;
+            padding-left: 35px;
+            img{
+                display: block;
+                width: 100%;
+                height: 100%;
+                border-radius: 35px;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .product-section{
+        padding-left: 30px;
+        padding-right: 30px;
+        .healthcare{
+            .card-section{  
+                /* display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 40px; */
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                column-gap: 20px;
+                max-width: 1000px;
+                margin: 0 auto;
+    
+            }
+            .product-card{
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .about-us{
+        h2{
+            font-weight: bold;
+            padding-bottom: 20px;
+        }
+        .mission-section{
+            @include flexCenter(row,center,center);
+            .earth, .innovation{
+                @include flexCenter(row,center,center);
+                max-width: 700px;
+                p{
+                    max-width: 190px;
+                }
+            }
+        }
+    }
+
+    .gallery{
+        .gallery-images{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 10px;
+            column-gap: 40px;
+            margin: 0 auto;
+            img {
+                width: 100%;       // Ocupa el ancho de la columna del grid
+                height: 400px;     // Mantiene su altura fija fija
+                object-fit: cover; // Evita que se distorsione al encogerse
+            }
+        }
+    }
+
+    .location{
+        text-align: center;
+        .map{
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+}
+    .footer-eco-store{
+        width: 100%;
+        max-width: 2000px;
+        margin: 0 auto;
+    }
+}
+
+
+/* 
+-----------------------------------------------------------
+PSEUDOCLASES
+-----------------------------------------------------------
+*/
+
+article{
+    button:hover{
+        transform:translateY(-2px);
+    }
+}
+
+.product-card:hover{
+    transform: translateY(-6px);
+    .icon{
+        svg:hover{
+            scale: 1.1;
+        }
+    }
+}
+
+.gallery-images{
+    img:hover{
+        transform: scale(1.1);
+    }
+}
+
+
